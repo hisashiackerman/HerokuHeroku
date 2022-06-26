@@ -4,7 +4,8 @@ from flask import Flask, render_template, flash
 from flask_sqlalchemy import SQLAlchemy
 
 from datetime import datetime
-from forms import UserForm
+from forms import UserForm, TwitterSearchForm
+import twitter_bot_python as bot
 
 
 app = Flask(__name__)
@@ -44,5 +45,16 @@ def index():
     return render_template('index.html', anime_list=anime_list, form=form, website_users=website_users)
 
 
-# if __name__ == '__main__':
-#     app.run(debug=True)
+@app.route('/analyse_tweets', methods=['GET', 'POST'])
+def analyse_tweets():
+    form = TwitterSearchForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        number_of_tweets = form.number_of_tweets.data
+        bot.plot_graph(username, number_of_tweets)
+        return render_template('result.html', username=username)
+    return render_template('analyse_tweets.html', form=form)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
