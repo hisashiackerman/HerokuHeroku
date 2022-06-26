@@ -1,7 +1,6 @@
 import nltk
 from nltk.tokenize import word_tokenize
 from collections import Counter
-from collections.abc import Sequence
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 from textblob import TextBlob

@@ -6,7 +6,6 @@ import nltk
 import spacy
 from nltk.tokenize import word_tokenize
 from collections import Counter
-from collections.abc import Sequence
 import plotly.express as px
 
 from nltk.stem import WordNetLemmatizer
